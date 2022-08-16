@@ -20,7 +20,7 @@ class SessionService {
 
   requestAccessToken(code) {
     const p = axios
-      .post( `${API_URL}/session/accessToken`,
+      .post( `${API_URL}/session/mobile/accessToken`,
         {code: code},
         { headers: HEADERS() }
       )
@@ -32,7 +32,7 @@ class SessionService {
     const accessToken = this.getToken();
     if (accessToken) {
       const p = axios
-        .post(`${API_URL}/session/refreshToken`,
+        .post(`${API_URL}/session/mobile/refreshToken`,
           {refresh_token: this.#getRefreshToken()},
           {headers: HEADERS()}
         )

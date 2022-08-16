@@ -1,3 +1,4 @@
+import React, {useEffect} from "react";
 import {
 	IonButton,
 	IonCardTitle,
@@ -13,9 +14,35 @@ import {
 	IonRow,
 	IonToolbar
 } from '@ionic/react';
+import {useHistory, useLocation} from "react-router-dom";
 import styles from './Login.module.scss';
 
+import sessionService from '../services/session.service';
+
+function useQuery() {
+	const { search } = useLocation();
+	return React.useMemo(() => new URLSearchParams(search), [search]);
+}
+
 const Login = () => {
+	const sessionCode = useQuery().get('code');
+
+	const history = useHistory();
+
+	useEffect(() => {
+		if (sessionCode) {
+			console.log('Session code: ' + sessionCode);
+			sessionService.requestAccessToken(sessionCode)
+				.then(() => {
+					history.push('/');
+				})
+				.catch(e => {
+					console.log(e);
+				});
+		}
+	}, []);
+
+	const goToMeliLogin = () => sessionService.requestAccessCode();
 
 	return (
 		<IonPage className={ styles.loginPage }>
@@ -36,7 +63,7 @@ const Login = () => {
 
 						<IonRow className={ `ion-text-center ion-justify-content-center` }>
 							<IonCol size="11">
-								<IonButton className={ `${ styles.getStartedButton } custom-button`} onClick={() => console.log('Click on login')} >
+								<IonButton className={ `${ styles.getStartedButton } custom-button`} onClick={goToMeliLogin} >
 									<IonIcon slot="start" src="/assets/icon/meli.svg" />
 									Ingresar con Mercadolibre &rarr;
 								</IonButton>

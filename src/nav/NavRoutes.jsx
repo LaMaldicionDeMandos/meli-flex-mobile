@@ -6,14 +6,13 @@ import Login from "../pages/Login";
 import {useEffect, useState} from "react";
 import Tab1 from "../pages/Tab1";
 
+import sessionService from '../services/session.service';
+
 //<Route path="/" component={ tabRoutes.filter(t => t.default)[0].component } exact={ true } />
 //<Redirect exact from="/" to={ tabRoutes.filter(t => t.default)[0].path.toString() }/>
 const NavRoutes = () => {
-    const [accessToken, setAccessToken] = useState();
+    const accessToken = sessionService.getToken();
 
-    useEffect(() => {
-
-    }, []);
     return (
         <IonReactRouter>
             <IonRouterOutlet id="main">
