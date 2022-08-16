@@ -1,7 +1,7 @@
-.placeItem {
+.OrderItem {
 
-	--padding-top: 1.5rem;
-	--padding-bottom: 1.5rem;
+	--padding-top: 0.5rem;
+	--padding-bottom: 0.5rem;
 
 	img {
 
@@ -13,9 +13,10 @@
 		margin-right: 1rem;
 	}
 
-	.placeItemRating {
-
+	.priceRight {
+		margin-top: 11px;
 		display: flex;
+		align-self: flex-start !important;
 		align-content: center;
 		align-items: center;
 

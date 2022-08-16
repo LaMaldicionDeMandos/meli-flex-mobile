@@ -1,5 +1,4 @@
 //	Main Tabs
-import Tab1 from "../pages/Tab1";
 import Tab2 from "../pages/Tab2";
 import Tab3 from "../pages/Tab3";
 
@@ -15,13 +14,14 @@ import Place from "../pages/Place";
 //  Import custom tab menu
 import Tabs from "../components/Tabs";
 import SubPages from "../components/SubPages";
+import Home from "../pages/Home";
 
 //	Array of objects representing tab pages
 //  These will be the main tabs across the app
 
 //  *   PARAMS per tab object   *
 //  isTab = true will make the tab appear
-//  default = the default tab page to open and be redirected to at "/" 
+//  default = the default tab page to open and be redirected to at "/"
 //  NOTE: there should only be one default tab (default: true)
 //  label = the label to show with the tab
 //  component = the component related to this tab page
@@ -29,7 +29,7 @@ import SubPages from "../components/SubPages";
 //  path = the path which the tab is accessible
 export const tabRoutes = [
 
-    { label: "Home", component: Tab1, icon: "Home", path: "/tabs/home", default: true, isTab: true },
+    { label: "Home", component: Home, icon: "Home", path: "/tabs/home", default: true, isTab: true },
     { label: "Places", component: Tab2, icon: "Location", path: "/tabs/places", default: false, isTab: true },
     { label: "Favourites", component: Tab3, icon: "Heart", path: "/tabs/favourites", default: false, isTab: true },
     // { label: "Profile", component: Tab3, icon: "User", path: "/tabs/profile", default: false, isTab: true },
