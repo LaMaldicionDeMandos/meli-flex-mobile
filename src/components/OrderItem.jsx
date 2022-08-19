@@ -14,6 +14,7 @@ import Currency from 'react-currency-formatter';
 
 import { chain } from 'lodash';
 import React from "react";
+import AcceptOrderButton from "./AcceptOrderButton";
 
 // install Swiper modules
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
@@ -50,7 +51,10 @@ const OrderItem = ({order}) => {
 					<h2 className="ion-text-end">
 					<IonBadge color="success"><b><Currency quantity={order.deliveryPrice} currency={"ARS"}/></b></IonBadge>
 					</h2>
-				<IonButton strong={false} color="primary">Aceptar</IonButton>
+				<AcceptOrderButton order={order} resultHandler={(r) => {
+					if (r === AcceptOrderButton.SUCCESS) console.log("SEEEEE!!!");
+					else if (r === AcceptOrderButton.ERROR) console.error('NOOOOOO!!!');
+				}}/>
 				</IonLabel>
 			</span>
 		</IonItem>

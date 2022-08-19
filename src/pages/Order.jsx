@@ -12,7 +12,8 @@ import {
 	IonRow,
 	IonText,
 	useIonRouter,
-	useIonViewWillEnter
+	useIonViewWillEnter,
+	useIonToast
 } from '@ionic/react';
 
 import styles from "../styles/Place.module.scss";
@@ -28,9 +29,26 @@ import Currency from "react-currency-formatter";
 
 import {chain} from 'lodash';
 import AddressItem from "../components/AddressItem";
+import AcceptOrderButton from "../components/AcceptOrderButton";
+
+
+const TOAST_DURATION = 4000;
+const TOAST_SUCCESS = {
+	message: 'Reparto aceptado! 😃',
+	color: 'success',
+	duration: TOAST_DURATION
+};
+const TOAST_ERROR = {
+	message: 'El reparto ya no está disponible 😢',
+	color: 'danger',
+	duration: TOAST_DURATION
+};
 
 const Order = () => {
 	const [order, setOrder] = useState();
+	const [showAcceptButton, setShowAcceptButton] = useState(true);
+
+	const [present] = useIonToast();
 
 	const { order_id } = useParams();
 
@@ -51,8 +69,10 @@ const Order = () => {
 		headingRef.current.style.display = "";
 	});
 
-	const onAccept = () => {
-		console.log('Acepto');
+	const onAccept = (r) => {
+		const toast = r === AcceptOrderButton.SUCCESS ? TOAST_SUCCESS : TOAST_ERROR;
+		present(toast);
+		setShowAcceptButton(false);
 	}
 
 	return (
@@ -61,17 +81,15 @@ const Order = () => {
 				<div className={ styles.customHeader }>
 					<img  src="/assets/login2.jpeg" className="animate__animated animate__slideInRight animate__faster" />
 
-
 					<div className="ion-justify-content-between">
 						<div className={ styles.customBackButton } onClick={ () => router.goBack() }>
 							<Iconly set="bold" name="CaretLeft" />
 						</div>
 					</div>
 
-					<div className={ styles.customAcceptButton } onClick={onAccept}>
-						<IonBadge strong={false} color="primary"><IonText className="ion-text-uppercase">aceptar</IonText></IonBadge>
-					</div>
-
+					{ showAcceptButton
+						? <AcceptOrderButton  order={order} customStyle={styles.customAcceptButton} buttonComponent={IonBadge} resultHandler={onAccept}/>
+						: '' }
 					<div className={ `${ styles.mainContent } animate__animated` } ref={ headingRef } style={{ display: "none" }}>
 						<IonGrid>
 							<IonRow>

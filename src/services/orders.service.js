@@ -22,6 +22,13 @@ class OrdersService {
       { headers: HEADERS({Authorization: sessionService.getToken()})}
     ).then(response => response.data);
   }
+
+  accept(id) {
+    return axios.post( `${API_URL}/orders/${id}/dealer`,
+      {},
+      { headers: HEADERS({Authorization: sessionService.getToken()})}
+    ).then(response => response.data);
+  }
 }
 
 const service = new OrdersService();
