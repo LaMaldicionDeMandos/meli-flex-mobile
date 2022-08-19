@@ -1,5 +1,5 @@
 import {
-	IonItem, IonLabel, IonText,
+	IonItem, IonLabel, IonText, IonBadge, IonIcon, IonButton
 } from '@ionic/react';
 
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
@@ -13,6 +13,9 @@ import styles from "../styles/Places.module.scss";
 import Currency from 'react-currency-formatter';
 
 import { chain } from 'lodash';
+import React from "react";
+
+import { SESSION_STORAGE_ORDER_KEY } from "../data/utils";
 
 // install Swiper modules
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
@@ -32,24 +35,25 @@ const OrderItem = ({order}) => {
 			list.push(`${key} (${value})`);
 			return list;
 		}, [])
-		.join(', ')
+		.map((destination, index) => <IonBadge key={index} color="medium" style={{ marginTop: "0.4rem", marginRight: '0.1rem' }}>{destination}</IonBadge>)
 		.value();
+
 	return (
-		<IonItem lines="full" className={ styles.OrderItem } detail={ true } routerLink={ `/view-place/${ order._id }` }>
+		<IonItem lines="full" className={ styles.OrderItem } detail={ true } routerLink={`/order/${order._id}`}>
 			<IonLabel>
-				<h2>Desde { order.origin.city.name }</h2>
+				<IonText>Desde <b>{ order.origin.city.name }</b></IonText>
 				<p>{`${packages} ${packegesSufix}`}</p>
 				<h2 style={{marginTop: '8px'}}>Hasta</h2>
-				<p>{destinations}</p>
+				{destinations}
 			</IonLabel>
 
 			<span className={ styles.priceRight }>
 				<IonLabel>
-				<h2>
-					<b><Currency quantity={order.deliveryPrice} currency={"ARS"}/></b>
-				</h2>
+					<h2 className="ion-text-end">
+					<IonBadge color="success"><b><Currency quantity={order.deliveryPrice} currency={"ARS"}/></b></IonBadge>
+					</h2>
+				<IonButton strong={false} color="primary">Aceptar</IonButton>
 				</IonLabel>
-
 			</span>
 		</IonItem>
 	);

@@ -38,9 +38,7 @@ const Home = () => {
 
 	useEffect(() => {
 		ordersService.getActiveOrders()
-			.then((orders) => {
-				setOrders(concat(orders, orders, orders, orders));
-			});
+			.then(setOrders);
 	}, []);
 
 	const placeItems = map(orders, (order) => <OrderItem key={order._id} order={order}/>);

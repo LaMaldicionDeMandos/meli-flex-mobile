@@ -1,0 +1,77 @@
+ul.ui-thermometer {
+    display: block;
+    list-style-type: none;
+    margin-block-start: 0.6em;
+    margin-block-end: 0.6em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 0.8rem;
+    padding-inline-end: 0.8rem;
+}
+.ui-thermometer {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    display: block;
+    height: auto;
+    margin-left: -6px;
+    overflow: hidden;
+    vertical-align: baseline;
+    width: 100%;
+}
+.ui-thermometer_level {
+    border-left: 6px solid #fff;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    float: left;
+    height: 8px;
+    margin-top: 2px;
+    width: 20%;
+}
+
+.ui-thermometer_level_1 {
+    background: #fff0f0;
+}
+
+.ui-thermometer_level_2 {
+    background: #fff5e8;
+}
+.ui-thermometer_level_3 {
+    background: #fffcda;
+}
+.ui-thermometer_level_4 {
+    background: #f1fdd7;
+}
+.ui-thermometer_level_5 {
+    background: #edf8ee;
+}
+
+.ui-thermometer[value="5_green"] .ui-thermometer_level_5 {
+    background: #39b54a;
+}
+
+.ui-thermometer[value="4_light_green"] .ui-thermometer_level_4 {
+    background: #bbff1f;
+}
+
+.ui-thermometer[value="3_yellow"] .ui-thermometer_level_3 {
+    background: #fff044;
+}
+
+.ui-thermometer[value="2_orange"] .ui-thermometer_level_2 {
+    background: #ffb656;
+}
+
+.ui-thermometer[value="1_red"] .ui-thermometer_level_1 {
+    background: #ff605a;
+}
+
+p.reputation {
+    margin: 0;
+}
+
+

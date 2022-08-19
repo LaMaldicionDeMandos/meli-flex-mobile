@@ -16,7 +16,7 @@
     top: 10px;
     right: 15px;
     background-color: white;
-    
+
     display: flex;
     flex-direction: row;
     align-content: center;
@@ -33,4 +33,13 @@
         width: 1.2rem;
         color: rgb(243, 102, 102);
     }
+}
+
+.ion-color-primary {
+    --ion-color-base: var(--ion-color-primary, #7c3b6a) !important;
+    --ion-color-base-rgb: var(--ion-color-primary-rgb, 56, 128, 255) !important;
+    --ion-color-contrast: var(--ion-color-primary-contrast, #fff) !important;
+    --ion-color-contrast-rgb: var(--ion-color-primary-contrast-rgb, 255, 255, 255) !important;
+    --ion-color-shade: var(--ion-color-primary-shade, #7c3b6a) !important;
+    --ion-color-tint: var(--ion-color-primary-tint, #7c3b6a) !important;
 }

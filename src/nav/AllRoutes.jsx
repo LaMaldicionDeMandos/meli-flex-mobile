@@ -3,8 +3,6 @@ import Tab2 from "../pages/Tab2";
 import Tab3 from "../pages/Tab3";
 
 //  Main tab children
-import Place from "../pages/Place";
-
 //  Sub pages
 // import InboxItem from "../../pages/InboxItem";
 
@@ -57,16 +55,11 @@ const tabChildrenRoutes = [
 
 //  This array should be sub pages which are not directly related to a tab page
 //  E.g. /child
-const subPageRoutes = [
-
-    { component: Place, path: "/view-place/:place_id" }
-];
 
 //  Let's combine these together as they need to be controlled within the same IonRouterOutlet
 const tabsAndChildrenRoutes = [ ...tabRoutes, ...tabChildrenRoutes ];
 
 //  Render sub routes
-export const AllSubPages = () => ( <SubPages routes={ subPageRoutes } /> );
 
 //	Render tab menu
 export const AllTabs = () => ( <Tabs tabs={ tabsAndChildrenRoutes } position="bottom" /> );
