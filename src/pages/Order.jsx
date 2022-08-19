@@ -1,25 +1,17 @@
 import {
-	IonBadge, IonButton,
+	IonBadge,
 	IonCard,
 	IonCardContent,
-	IonCardHeader,
-	IonCardSubtitle,
 	IonCardTitle,
 	IonCol,
 	IonContent,
-	IonFooter,
 	IonGrid,
-	IonHeader,
-	IonIcon, IonLabel,
+	IonHeader, IonList,
 	IonNote,
 	IonPage,
 	IonRow,
 	IonText,
-	IonTitle,
-	IonToolbar,
 	useIonRouter,
-	useIonToast,
-	useIonViewDidEnter,
 	useIonViewWillEnter
 } from '@ionic/react';
 
@@ -34,10 +26,18 @@ import SellerReputation from "../components/SellerReputation";
 import OrderMap from "../components/OrderMap";
 import Currency from "react-currency-formatter";
 
+import {chain} from 'lodash';
+import AddressItem from "../components/AddressItem";
+
 const Order = () => {
 	const [order, setOrder] = useState();
 
 	const { order_id } = useParams();
+
+	const addresses = chain(order?.orders)
+		.map((order) => order.shippingAddress)
+		.map(address => <AddressItem key={address.id} address={address} />)
+		.value();
 
 	useEffect(() => {
 		ordersService.getOrder(order_id).then(setOrder);
@@ -121,16 +121,11 @@ const Order = () => {
 							</IonCard>
 						</IonCol>
 					</IonRow>
-
-					<IonRow className={ `${ styles.aboutContainer } animate__animated animate__fadeIn animate__faster` }>
-						<IonCol size="12">
-							<IonCardTitle>About</IonCardTitle>
-							<IonNote>
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan sem eget purus lacinia, tristique aliquet ipsum consequat.
-							</IonNote>
-						</IonCol>
-					</IonRow>
 				</IonGrid>
+
+				<IonList className="ion-padding-bottom ion-margin-bottom animate__animated animate__fadeIn animate__faster">
+					{addresses}
+				</IonList>
 			</IonContent>
 		</IonPage>
 	);

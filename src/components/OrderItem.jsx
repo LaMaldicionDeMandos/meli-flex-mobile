@@ -15,8 +15,6 @@ import Currency from 'react-currency-formatter';
 import { chain } from 'lodash';
 import React from "react";
 
-import { SESSION_STORAGE_ORDER_KEY } from "../data/utils";
-
 // install Swiper modules
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
