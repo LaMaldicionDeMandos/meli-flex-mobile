@@ -10,9 +10,7 @@ import {
 	IonIcon,
 	IonImg,
 	IonPage,
-	IonRouterLink,
 	IonRow,
-	IonToolbar
 } from '@ionic/react';
 import {useHistory, useLocation} from "react-router-dom";
 import styles from './Login.module.scss';

@@ -1,6 +1,5 @@
 //	Main Tabs
-import Tab2 from "../pages/Tab2";
-import Tab3 from "../pages/Tab3";
+import MyShippings from "../pages/MyShippings";
 
 //  Main tab children
 //  Sub pages
@@ -13,6 +12,7 @@ import Tab3 from "../pages/Tab3";
 import Tabs from "../components/Tabs";
 import SubPages from "../components/SubPages";
 import Home from "../pages/Home";
+import Profile from "../pages/Profile";
 
 //	Array of objects representing tab pages
 //  These will be the main tabs across the app
@@ -28,8 +28,8 @@ import Home from "../pages/Home";
 export const tabRoutes = [
 
     { label: "Home", component: Home, icon: "Home", path: "/tabs/home", default: true, isTab: true },
-    { label: "Places", component: Tab2, icon: "Location", path: "/tabs/places", default: false, isTab: true },
-    { label: "Favourites", component: Tab3, icon: "Heart", path: "/tabs/favourites", default: false, isTab: true },
+    { label: "My Shippings", component: MyShippings, icon: "Location", path: "/tabs/my_shippings", default: false, isTab: true },
+    { label: "Profile", component: Profile, icon: "User", path: "/tabs/users", default: false, isTab: true },
     // { label: "Profile", component: Tab3, icon: "User", path: "/tabs/profile", default: false, isTab: true },
 ];
 

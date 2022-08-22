@@ -6,18 +6,27 @@ import Login from "../pages/Login";
 import Order from "../pages/Order";
 
 import sessionService from '../services/session.service';
+import MyOrder from "../pages/MyOrder";
+import FRE1 from "../pages/FRE1";
+import LoadingPage from "../pages/LoadingPage";
 
 const NavRoutes = () => {
     const accessToken = sessionService.getToken();
 
+    const initialPage = () => {
+      if (!accessToken) return <Redirect to="/login" />;
+      else return <Redirect to="/loading" />
+    }
+
     return (
         <IonReactRouter>
             <IonRouterOutlet id="main">
-              <Route exact path="/" render={() => !accessToken
-                ? <Redirect to="/login" />
-                : <Redirect to="/tabs/home" /> }/>
+              <Route exact path="/" render={initialPage}/>
               <Route path="/login"><Login /></Route>
+              <Route path="/fre"><FRE1 /></Route>
+              <Route path="/loading"><LoadingPage /></Route>
               <Route path="/order/:order_id"><Order /></Route>
+              <Route path="/myorder/:order_id"><MyOrder /></Route>
               <Route path="/tabs" render={ () => <AllTabs />} />
             </IonRouterOutlet>
         </IonReactRouter>

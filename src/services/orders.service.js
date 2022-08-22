@@ -17,6 +17,12 @@ class OrdersService {
     ).then(response => response.data);
   }
 
+  getMyActiveOrders() {
+    return axios.get( `${API_URL}/orders/my`,
+      { headers: HEADERS({Authorization: sessionService.getToken()})}
+    ).then(response => response.data);
+  }
+
   getOrder(id) {
     return axios.get( `${API_URL}/orders/${id}`,
       { headers: HEADERS({Authorization: sessionService.getToken()})}

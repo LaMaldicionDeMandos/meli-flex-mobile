@@ -1,6 +1,7 @@
 import {
-	IonItem, IonLabel, IonText, IonBadge, IonIcon, IonButton
+	IonItem, IonLabel, IonText, IonChip, IonIcon, IonButton
 } from '@ionic/react';
+import { checkmarkDoneOutline } from 'ionicons/icons';
 
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 
@@ -15,7 +16,7 @@ import React from "react";
 // install Swiper modules
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
-const AddressItem = ({address}) => {
+const AddressItem = ({address, status}) => {
 
 	return (
 		<IonItem lines="full" className={ styles.OrderItem } detail={ false } >
@@ -23,6 +24,9 @@ const AddressItem = ({address}) => {
 				<IonText>{ address.address_line }</IonText>
 				<p>{`(${address.city.name})`}</p>
 			</IonLabel>
+			{status !== 'ready_to_ship'
+				? <IonChip color="success"><IonIcon icon={checkmarkDoneOutline} ></IonIcon></IonChip>
+				: ''}
 		</IonItem>
 	);
 };

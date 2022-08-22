@@ -1,0 +1,106 @@
+.signupPage {
+    ion-toolbar {
+        --background-color: #7c3b6a;
+        --border-style: none;
+        --border-color: transparent;
+        --padding-top: 1rem;
+        --padding-bottom: 1rem;
+        --padding-start: 1rem;
+        --padding-end: 1rem;
+    }
+
+    ion-grid {
+        background-color: #7c3b6a;
+    }
+
+    p {
+
+        margin-top: 0.2rem;
+        color: #d3a6c7;
+    }
+}
+
+.headingText {
+
+    p {
+
+        margin-top: 0.2rem;
+        color: #d3a6c7;
+    }
+}
+
+.spinnerBox {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+}
+
+@keyframes configure-clockwise {
+    0% {
+        transform: rotate(0);
+    }
+    25% {
+        transform: rotate(90deg);
+    }
+    50% {
+        transform: rotate(180deg);
+    }
+    75% {
+        transform: rotate(270deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes configure-xclockwise {
+    0% {
+        transform: rotate(45deg);
+    }
+    25% {
+        transform: rotate(-45deg);
+    }
+    50% {
+        transform: rotate(-135deg);
+    }
+    75% {
+        transform: rotate(-225deg);
+    }
+    100% {
+        transform: rotate(-315deg);
+    }
+}
+
+.configureCore {
+    width: 100%;
+    height: 100%;
+    background-color: #7c3b6a;
+}
+
+.configureBorder1 {
+    width: 115px;
+    height: 115px;
+    padding: 3px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fb5b53;
+    animation: configure-clockwise 3s ease-in-out 0s infinite alternate;
+}
+
+.configureBorder2 {
+    width: 115px;
+    height: 115px;
+    padding: 3px;
+    left: -115px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(63,249,220);
+    transform: rotate(45deg);
+    animation: configure-xclockwise 3s ease-in-out 0s infinite alternate;
+}

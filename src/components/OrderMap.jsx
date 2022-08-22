@@ -2,10 +2,11 @@ import React from "react";
 import {chain, map, reduce, concat} from "lodash";
 
 const SHIPPING_MAP_ID = 'shipping_map';
+const PIN_SVG = "M0-48c-9.8 0-17.7 7.8-17.7 17.4 0 15.5 17.7 30.6 17.7 30.6s17.7-15.4 17.7-30.6c0-9.6-7.9-17.4-17.7-17.4z";
 
 const ORIGIN_MARKER_SVG = {
-	path: "M0-48c-9.8 0-17.7 7.8-17.7 17.4 0 15.5 17.7 30.6 17.7 30.6s17.7-15.4 17.7-30.6c0-9.6-7.9-17.4-17.7-17.4z",
-	fillColor: "green",
+	path: PIN_SVG,
+	fillColor: "blue",
 	fillOpacity: 0.6,
 	strokeWeight: 0,
 	rotation: 0,
@@ -14,7 +15,7 @@ const ORIGIN_MARKER_SVG = {
 }
 
 const DESTINATION_MARKER_SVG = {
-	path: "M0-48c-9.8 0-17.7 7.8-17.7 17.4 0 15.5 17.7 30.6 17.7 30.6s17.7-15.4 17.7-30.6c0-9.6-7.9-17.4-17.7-17.4z",
+	path: PIN_SVG,
 	fillColor: "red",
 	fillOpacity: 0.6,
 	strokeWeight: 0,
@@ -23,8 +24,18 @@ const DESTINATION_MARKER_SVG = {
 	labelOrigin: {x: 0, y: -30}
 }
 
+const DESTINATION_MARKER_CHECKED_SVG = {
+	path: PIN_SVG,
+	fillColor: "green",
+	fillOpacity: 0.6,
+	strokeWeight: 0,
+	rotation: 0,
+	scale: 0.7,
+	labelOrigin: {x: 0, y: -30}
+}
+
 const SELF_MARKER_SVG = {
-	path: "M0-48c-9.8 0-17.7 7.8-17.7 17.4 0 15.5 17.7 30.6 17.7 30.6s17.7-15.4 17.7-30.6c0-9.6-7.9-17.4-17.7-17.4z",
+	path: PIN_SVG,
 	fillColor: "blue",
 	fillOpacity: 0.6,
 	strokeWeight: 0,
@@ -49,6 +60,13 @@ const ORIGIN_MARKER_ICON_LABEL = {
 
 const DESTINATION_MARKER_ICON_LABEL = {
 	text: "\uea44", // codepoint from https://fonts.google.com/icons
+	fontFamily: "Material Icons",
+	color: "#ffffff",
+	fontSize: "18px",
+};
+
+const DESTINATION_MARKER_CHECKED_ICON_LABEL = {
+	text: "\ue877", // codepoint from https://fonts.google.com/icons
 	fontFamily: "Material Icons",
 	color: "#ffffff",
 	fontSize: "18px",
@@ -105,19 +123,34 @@ const OrderMap = ({order}) => {
 	}
 
 	const createDestinationMarker = (pos, gmap) => {
+		if (pos.status === 'ready_to_ship') {
+			return new window.google.maps.Marker({
+				position: pos,
+				map: gmap,
+				icon: DESTINATION_MARKER_SVG,
+				label: DESTINATION_MARKER_ICON_LABEL
+			});
+		} else {
+			return createDestinationCheckedMarker(pos, gmap);
+		}
+
+	}
+
+	const createDestinationCheckedMarker = (pos, gmap) => {
 		return new window.google.maps.Marker({
 			position: pos,
 			map: gmap,
-			icon: DESTINATION_MARKER_SVG,
-			label: DESTINATION_MARKER_ICON_LABEL
+			icon: DESTINATION_MARKER_CHECKED_SVG,
+			label: DESTINATION_MARKER_CHECKED_ICON_LABEL
 		});
 	}
 
 	const initMap = async () => {
 		const origin = { lat: order.origin.latitude, lng: order.origin.longitude };
 		const destinations = map(order.orders, or => {
-			return {lat: or.shippingAddress.latitude, lng: or.shippingAddress.longitude};
+			return {lat: or.shippingAddress.latitude, lng: or.shippingAddress.longitude, status: or.shippingStatus};
 		});
+
 
 		const center = calculateCenter(concat([origin], destinations));
 

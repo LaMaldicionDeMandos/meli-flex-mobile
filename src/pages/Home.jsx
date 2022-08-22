@@ -41,7 +41,7 @@ const Home = () => {
 			.then(setOrders);
 	}, []);
 
-	const placeItems = map(orders, (order) => <OrderItem key={order._id} order={order}/>);
+	const orderItems = map(orders, (order) => <OrderItem key={order._id} order={order}/>);
 
 	useIonViewDidEnter(() => {
 		setSlideSpace(-40);
@@ -61,7 +61,7 @@ const Home = () => {
 				</IonGrid>
 
 				<IonList className="ion-padding-bottom ion-margin-bottom animate__animated animate__fadeIn animate__faster">
-					{placeItems}
+					{orderItems}
 				</IonList>
 			</IonContent>
 		</IonPage>

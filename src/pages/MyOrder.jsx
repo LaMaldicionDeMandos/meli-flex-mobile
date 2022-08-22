@@ -30,30 +30,14 @@ import {chain} from 'lodash';
 import AddressItem from "../components/AddressItem";
 import AcceptOrderButton from "../components/AcceptOrderButton";
 
-
-const TOAST_DURATION = 4000;
-const TOAST_SUCCESS = {
-	message: 'Reparto aceptado! 😃',
-	color: 'success',
-	duration: TOAST_DURATION
-};
-const TOAST_ERROR = {
-	message: 'El reparto ya no está disponible 😢',
-	color: 'danger',
-	duration: TOAST_DURATION
-};
-
-const Order = () => {
+const MyOrder = () => {
 	const [order, setOrder] = useState();
-	const [showAcceptButton, setShowAcceptButton] = useState(true);
-
-	const [present] = useIonToast();
 
 	const { order_id } = useParams();
 
 	const addresses = chain(order?.orders)
-		.map((order) => order.shippingAddress)
-		.map(address => <AddressItem key={address.id} address={address} />)
+		.map((order) => {return {address: order.shippingAddress, status: order.shippingStatus}})
+		.map(address => <AddressItem key={address.address.id} address={address.address} status={address.status}/>)
 		.value();
 
 	useEffect(() => {
@@ -68,12 +52,6 @@ const Order = () => {
 		headingRef.current.style.display = "";
 	});
 
-	const onAccept = (r) => {
-		const toast = r === AcceptOrderButton.SUCCESS ? TOAST_SUCCESS : TOAST_ERROR;
-		present(toast);
-		setShowAcceptButton(false);
-	}
-
 	return (
 		<IonPage>
 			<IonHeader>
@@ -86,9 +64,6 @@ const Order = () => {
 						</div>
 					</div>
 
-					{ showAcceptButton
-						? <AcceptOrderButton  order={order} customStyle={styles.customAcceptButton} buttonComponent={IonBadge} resultHandler={onAccept}/>
-						: '' }
 					<div className={ `${ styles.mainContent } animate__animated` } ref={ headingRef } style={{ display: "none" }}>
 						<IonGrid>
 							<IonRow>
@@ -148,4 +123,4 @@ const Order = () => {
 	);
 };
 
-export default Order;
+export default MyOrder;
