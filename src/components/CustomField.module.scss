@@ -22,7 +22,7 @@
     }
 }
 .customInput {
-
+    --placeholder-color: azure;
     --background: #834e76;
     --padding-bottom: 1rem;
     --padding-top: 1rem;
@@ -31,4 +31,7 @@
     border-radius: 10px;
     margin-top: 0.25rem;
     transition: all 0.2s linear;
+    text-align: initial;
+    font-size: 16px;
+    color: white;
 }

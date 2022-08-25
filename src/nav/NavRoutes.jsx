@@ -7,7 +7,7 @@ import Order from "../pages/Order";
 
 import sessionService from '../services/session.service';
 import MyOrder from "../pages/MyOrder";
-import FRE1 from "../pages/FRE1";
+import Fre from "../pages/Fre";
 import LoadingPage from "../pages/LoadingPage";
 
 const NavRoutes = () => {
@@ -23,7 +23,7 @@ const NavRoutes = () => {
             <IonRouterOutlet id="main">
               <Route exact path="/" render={initialPage}/>
               <Route path="/login"><Login /></Route>
-              <Route path="/fre"><FRE1 /></Route>
+              <Route path="/fre"><Fre /></Route>
               <Route path="/loading"><LoadingPage /></Route>
               <Route path="/order/:order_id"><Order /></Route>
               <Route path="/myorder/:order_id"><MyOrder /></Route>

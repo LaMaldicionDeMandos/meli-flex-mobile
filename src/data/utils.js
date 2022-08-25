@@ -34,7 +34,7 @@ export const validateForm = fields => {
 				const error = {
 
 					id: field.id,
-					message: `Please check your ${ field.id }`,
+					message: `Por favor revisá tu ${ field.label }`,
 				};
 
 				errors.push(error);

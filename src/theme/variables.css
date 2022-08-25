@@ -74,6 +74,8 @@ http://ionicframework.com/docs/theming/ */
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+  --swiper-pagination-color: #d3a6c7;
 }
 
 .tab-dot {
@@ -96,4 +98,13 @@ input.searchbar-input {
 ion-searchbar ion-icon {
 
   margin-top: 0.4rem;
+}
+
+.custom-button {
+  --border-radius: 5px !important;
+  --background: rgb(236, 149, 35);
+  --background-activated: rgb(192, 125, 38);
+  --background-focused: rgb(192, 125, 38);
+  font-size: 1.2rem;
+  margin-top: 1rem;
 }

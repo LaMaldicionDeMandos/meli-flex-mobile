@@ -17,10 +17,8 @@ const LoadingPage = () => {
 
 	useEffect(() => {
 		sessionService.getProfile()
-			.then((profile) => {
-				if (profile) history.push('tabs/home');
-				else history.push('/fre');
-			});
+			.then((profile) => history.push('tabs/home'))
+			.catch(() => history.push('/fre'));
 	}, []);
 
 	return (

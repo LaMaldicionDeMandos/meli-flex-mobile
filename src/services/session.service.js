@@ -60,7 +60,8 @@ class SessionService {
   getProfile() {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        resolve();
+        console.log('Chau!');
+        reject();
       }, 3000);
     });
   }

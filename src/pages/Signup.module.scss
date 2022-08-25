@@ -22,6 +22,12 @@
         margin-top: 0.2rem;
         color: #d3a6c7;
     }
+
+    ion-slides {
+        height: 100%;
+        --bullet-background: red !important;
+        --bullet-background-active: rebeccapurple !important;
+    }
 }
 
 .headingText {
@@ -31,4 +37,9 @@
         margin-top: 0.2rem;
         color: #d3a6c7;
     }
+}
+
+.swiper-pagination-bullet-active {
+    opacity: 1;
+    background: var(--swiper-pagination-color, var(--swiper-theme-color));
 }
