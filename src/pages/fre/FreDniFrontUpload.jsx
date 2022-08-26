@@ -11,6 +11,7 @@ import {
 import {idCardOutline, cloudUploadOutline} from 'ionicons/icons';
 import freStyles from '../Signup.module.scss';
 import React from "react";
+import { FilePicker } from '@capawesome/capacitor-file-picker';
 
 const FreDniFrontUpload = ({ nextHandler = () => {} }) => {
 	const addDNIFrontUrl = () => {
@@ -18,6 +19,11 @@ const FreDniFrontUpload = ({ nextHandler = () => {} }) => {
 	}
 
 	const uploadFile = async () => {
+		const result = await FilePicker.pickFiles({
+			types: ['image/*'],
+			multiple: false,
+		});
+		console.log(`Pick file ${JSON.stringify(result)}`);
 	}
 
 	return (

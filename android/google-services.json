@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "790247103349",
+    "project_id": "happy-shipping",
+    "storage_bucket": "happy-shipping.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:790247103349:android:d622ddc4e5562f2996d13c",
+        "android_client_info": {
+          "package_name": "com.mpasut.happyshipping"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "790247103349-do0nl296ktqul778is6qhi76nah9jghg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQasO-IAjgzTqPaAHW0JegmB6gw7NdZXE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "790247103349-do0nl296ktqul778is6qhi76nah9jghg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
