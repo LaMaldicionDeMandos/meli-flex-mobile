@@ -14,6 +14,7 @@ import {Iconly} from "react-iconly";
 
 import { assign } from 'lodash';
 import FreDni from "./fre/FreDni";
+import FreDniFrontUpload from "./fre/FreDniFrontUpload";
 
 const Fre = () => {
 	const [profile, setProfile] = useState({});
@@ -58,6 +59,7 @@ const Fre = () => {
 					<IonSlide><FreInit nextHandler={next}/></IonSlide>
 					<IonSlide><FreName nextHandler={next}/></IonSlide>
 					<IonSlide><FreDni nextHandler={next}/></IonSlide>
+					<IonSlide><FreDniFrontUpload nextHandler={next}/></IonSlide>
 				</IonSlides>
 
 			</IonContent>

@@ -1,0 +1,6 @@
+{
+  "appId": "com.mpasut.happyshipping",
+  "appName": "Happy Shipping",
+  "webDir": "build",
+  "bundledWebRuntime": false
+}

@@ -28,6 +28,7 @@ const Login = () => {
 	const history = useHistory();
 
 	useEffect(() => {
+		console.log('Login');
 		if (sessionCode) {
 			console.log('Session code: ' + sessionCode);
 			sessionService.requestAccessToken(sessionCode)

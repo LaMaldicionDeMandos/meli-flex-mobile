@@ -1,10 +1,9 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdk compileSdkVersion
+    compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "com.example.app"
-        compileSdkVersion 30
+        applicationId "com.mpasut.happyshipping"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

@@ -9,11 +9,12 @@ import sessionService from '../services/session.service';
 import MyOrder from "../pages/MyOrder";
 import Fre from "../pages/Fre";
 import LoadingPage from "../pages/LoadingPage";
+import DeepLinkListener from "../components/DeepLinkListener";
+import LoginStep2 from "../pages/LoginStep2";
 
 const NavRoutes = () => {
-    const accessToken = sessionService.getToken();
-
     const initialPage = () => {
+      const accessToken = sessionService.getToken();
       if (!accessToken) return <Redirect to="/login" />;
       else return <Redirect to="/loading" />
     }
@@ -23,12 +24,14 @@ const NavRoutes = () => {
             <IonRouterOutlet id="main">
               <Route exact path="/" render={initialPage}/>
               <Route path="/login"><Login /></Route>
+              <Route path="/login_step_2/:code"><LoginStep2 /></Route>
               <Route path="/fre"><Fre /></Route>
               <Route path="/loading"><LoadingPage /></Route>
               <Route path="/order/:order_id"><Order /></Route>
               <Route path="/myorder/:order_id"><MyOrder /></Route>
               <Route path="/tabs" render={ () => <AllTabs />} />
             </IonRouterOutlet>
+          <DeepLinkListener />
         </IonReactRouter>
     );
 }

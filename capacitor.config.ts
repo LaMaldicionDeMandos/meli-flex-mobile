@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.example.app',
-  appName: 'ionic-react-travel-app',
+  appId: 'com.mpasut.happyshipping',
+  appName: 'Happy Shipping',
   webDir: 'build',
   bundledWebRuntime: false
 };

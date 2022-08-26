@@ -1,12 +1,13 @@
 import axios from 'axios';
 import * as _ from 'lodash';
+import { Browser } from '@capacitor/browser';
+import { App } from '@capacitor/app';
 
 const API_URL = process.env.REACT_APP_API_URL;
 const MELI_APP_ID = process.env.REACT_APP_MELI_APP_ID;
 const MELI_REDIRECT_URL = process.env.REACT_APP_MELI_REDIRECT_URL;
 const MELI_LOGIN_URL = `https://auth.mercadolibre.com.ar/authorization?response_type=code&client_id=${MELI_APP_ID}&redirect_uri=${MELI_REDIRECT_URL}`;
 
-const CACHED_PROFILE_KEY = 'cached_profile_';
 const HEADERS = (headers = {}) => _.assign({
   Accept: "application/json",
   "Access-Control-Allow-Origin": "*",
@@ -16,7 +17,22 @@ const HEADERS = (headers = {}) => _.assign({
 class SessionService {
 
   requestAccessCode() {
-    window.location.replace(MELI_LOGIN_URL);
+    Browser.addListener('browserPageLoaded', (e) => {
+      console.log('Page loaded ' + e);
+      const m = JSON.stringify(e);
+    });
+    /*
+    Browser.addListener('browserFinished', (e) => {
+      console.log('browser finished' + e);
+      Browser.removeAllListeners()
+        .then(() => {
+          console.log("Close app");
+          App.exitApp();
+        });
+    });
+
+     */
+    Browser.open({url: MELI_LOGIN_URL});
   }
 
   requestAccessToken(code) {

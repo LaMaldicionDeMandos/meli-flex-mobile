@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">ionic-react-travel-app</string>
-    <string name="title_activity_main">ionic-react-travel-app</string>
-    <string name="package_name">com.example.app</string>
-    <string name="custom_url_scheme">com.example.app</string>
+    <string name="app_name">Happy Shipping</string>
+    <string name="title_activity_main">Happy Shipping</string>
+    <string name="package_name">com.mpasut.happyshipping</string>
+    <string name="custom_url_scheme">com.mpasut.happyshipping</string>
 </resources>
