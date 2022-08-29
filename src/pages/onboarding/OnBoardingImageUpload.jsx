@@ -15,7 +15,7 @@ import {Camera, CameraDirection, CameraResultType, CameraSource} from '@capacito
 import { head } from 'lodash';
 import imagesService from '../../services/images.service';
 
-const OnBoardingImageUpload = ({ context, orientation = OnBoardingImageUpload.LANDSCAPE, nextHandler = () => {} }) => {
+const OnBoardingImageUpload = ({ icon = idCardOutline, context, orientation = OnBoardingImageUpload.LANDSCAPE, nextHandler = () => {} }) => {
 	const [imageUri, setImageUri] = useState();
 	const previewStyle = orientation === OnBoardingImageUpload.PORTRAIT ? freStyles.previewPortrait : freStyles.previewLandscape;
 	const addProperty = () => {
@@ -72,7 +72,7 @@ const OnBoardingImageUpload = ({ context, orientation = OnBoardingImageUpload.LA
 								<p>{context.subtitle}</p>
 							</div>
 							<div className={ freStyles.favouriteButton }>
-								<IonIcon icon={idCardOutline} size="large" style={{color: '#d3a6c7'}} />
+								<IonIcon icon={icon} size="large" style={{color: '#d3a6c7'}} />
 							</div>
 						</div>
 					</IonCol>

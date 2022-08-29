@@ -4,7 +4,6 @@ import {
 	IonSlides,
 	IonSlide, IonHeader, IonImg
 } from '@ionic/react';
-import { rocketOutline, colorPalette } from 'ionicons/icons';
 import freStyles from './Signup.module.scss';
 import React, {useRef, useState} from "react";
 import OnBoardingInit from "./onboarding/OnBoardingInit";
@@ -16,6 +15,8 @@ import styles from "../styles/Place.module.scss";
 import {Iconly} from "react-iconly";
 import { assign } from 'lodash';
 import OnBoardingDniBack from "./onboarding/OnBoardingDniBack";
+import OnBoardingPhoto from "./onboarding/OnBoardingPhoto";
+import OnBoardingCBU from "./onboarding/OnBoardingCBU";
 
 const OnBoarding = () => {
 	const [profile, setProfile] = useState({});
@@ -36,10 +37,14 @@ const OnBoarding = () => {
 		setProfile(p);
 
 		if (lastSlide) {
-			console.log(`send form: ${JSON.stringify(p)}`)
+			finalizeOnBoarding(p);
 		} else {
 			sliderRef.current.slideNext();
 		}
+	}
+
+	const finalizeOnBoarding = (profile) => {
+		console.log(`send form: ${JSON.stringify(profile)}`)
 	}
 
 	return (
@@ -61,6 +66,8 @@ const OnBoarding = () => {
 					<IonSlide><OnBoardingDni nextHandler={next}/></IonSlide>
 					<IonSlide><OnBoardingDniFront nextHandler={next}/></IonSlide>
 					<IonSlide><OnBoardingDniBack nextHandler={next}/></IonSlide>
+					<IonSlide><OnBoardingPhoto nextHandler={next}/></IonSlide>
+					<IonSlide><OnBoardingCBU nextHandler={next}/></IonSlide>
 				</IonSlides>
 
 			</IonContent>
