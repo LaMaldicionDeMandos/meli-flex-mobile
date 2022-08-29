@@ -9,6 +9,8 @@ import {idCardOutline, cloudUploadOutline, cameraOutline} from 'ionicons/icons';
 import freStyles from '../Signup.module.scss';
 import React, {useState} from "react";
 import { FilePicker } from '@capawesome/capacitor-file-picker';
+import { Camera, CameraResultType } from '@capacitor/camera';
+
 
 import { head } from 'lodash';
 import imagesService from '../../services/images.service';
@@ -21,22 +23,39 @@ const OnBoardingImageUpload = ({ context, nextHandler = () => {} }) => {
 			nextHandler(delta);
 	}
 
-	const uploadFile = async () => {
-		const result = await FilePicker.pickFiles({
-			types: ['image/*'],
-			multiple: false,
-		});
-		console.log(`Pick file ${JSON.stringify(result)}`);
-		const file = head(result.files);
-		let base64Image = 'data:image/jpeg;base64,' + file.data;
+	const saveImage = (base64Image) => {
 		setImageUri(base64Image);
-		imagesService.uploadImage(context.uri, new Buffer(file.data, 'base64'))
+		imagesService.uploadImage(context.uri, new Buffer(base64Image, 'base64'))
 			.then((image) => {
 				console.log('Imagen subida ' + JSON.stringify(image));
 			})
 			.catch((e) => {
 				console.error(e);
 			});
+	}
+
+	const uploadFile = async () => {
+		const result = await FilePicker.pickFiles({
+			types: ['image/*'],
+			multiple: false,
+		});
+		const file = head(result.files);
+		saveImage('data:image/jpeg;base64,' + file.data);
+	}
+
+	const takePhoto = async () => {
+		const options = {
+			quality: 90,
+			allowEditing: false,
+			resultType: CameraResultType.DataUrl
+		}
+		try {
+			const result = await Camera.getPhoto(options);
+			console.log('photo ==>' + JSON.stringify(result.dataUrl));
+			saveImage(result.dataUrl);
+		}catch(e) {
+			console.log('Error al tomar la foto :(');
+		}
 	}
 
 	return (
@@ -68,7 +87,7 @@ const OnBoardingImageUpload = ({ context, nextHandler = () => {} }) => {
 						<IonButton size="large" className="custom-button" expand="block" onClick={ uploadFile }><IonIcon icon={cloudUploadOutline}></IonIcon></IonButton>
 					</IonCol>
 					<IonCol size="6">
-						<IonButton size="large" className="custom-button" expand="block" onClick={ uploadFile }><IonIcon icon={cameraOutline}></IonIcon></IonButton>
+						<IonButton size="large" className="custom-button" expand="block" onClick={ takePhoto }><IonIcon icon={cameraOutline}></IonIcon></IonButton>
 					</IonCol>
 				</IonRow>
 			</IonGrid>
