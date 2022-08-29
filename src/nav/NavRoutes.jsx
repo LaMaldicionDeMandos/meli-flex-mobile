@@ -7,7 +7,7 @@ import Order from "../pages/Order";
 
 import sessionService from '../services/session.service';
 import MyOrder from "../pages/MyOrder";
-import Fre from "../pages/Fre";
+import OnBoarding from "../pages/Onboarding";
 import LoadingPage from "../pages/LoadingPage";
 import DeepLinkListener from "../components/DeepLinkListener";
 import LoginStep2 from "../pages/LoginStep2";
@@ -25,7 +25,7 @@ const NavRoutes = () => {
               <Route exact path="/" render={initialPage}/>
               <Route path="/login"><Login /></Route>
               <Route path="/login_step_2/:code"><LoginStep2 /></Route>
-              <Route path="/fre"><Fre /></Route>
+              <Route path="/onboarding"><OnBoarding /></Route>
               <Route path="/loading"><LoadingPage /></Route>
               <Route path="/order/:order_id"><Order /></Route>
               <Route path="/myorder/:order_id"><MyOrder /></Route>

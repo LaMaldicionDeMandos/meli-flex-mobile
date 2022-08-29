@@ -28,6 +28,16 @@
         --bullet-background: red !important;
         --bullet-background-active: rebeccapurple !important;
     }
+
+    .preview {
+        img {
+            border-radius: 15px;
+            height: 8rem;
+            width: 12rem;
+            border: 2px solid rgb(235, 235, 235);
+            padding: 0.1rem;
+        }
+    }
 }
 
 .headingText {
