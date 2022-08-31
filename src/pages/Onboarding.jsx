@@ -20,6 +20,7 @@ import OnBoardingCBU from "./onboarding/OnBoardingCBU";
 
 import profileService from '../services/profile.service';
 import {useHistory} from "react-router-dom";
+import OnBoardingPhone from "./onboarding/OnBoardingPhone";
 
 const OnBoarding = () => {
 	const [profile, setProfile] = useState({});
@@ -72,6 +73,7 @@ const OnBoarding = () => {
 					<IonSlide><OnBoardingDniFront nextHandler={next}/></IonSlide>
 					<IonSlide><OnBoardingDniBack nextHandler={next}/></IonSlide>
 					<IonSlide><OnBoardingPhoto nextHandler={next}/></IonSlide>
+					<IonSlide><OnBoardingPhone nextHandler={next}/></IonSlide>
 					<IonSlide><OnBoardingCBU nextHandler={next}/></IonSlide>
 				</IonSlides>
 
