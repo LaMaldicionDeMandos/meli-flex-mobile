@@ -9,6 +9,7 @@ import {
 	IonList,
 	IonRow,
 	useIonViewDidEnter,
+	useIonToast,
 } from '@ionic/react';
 import { useStoreState } from 'pullstate';
 import { PlacesStore } from '../store';
@@ -30,15 +31,46 @@ import ordersService from '../services/orders.service';
 // install Swiper modules
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
+const TOAST_DURATION = 7000;
+const TOAST_ERROR_REJECTED = {
+	message: 'Esta cuenta está rechazado, hiciste algo muy malo 😡!',
+	color: 'danger',
+	duration: TOAST_DURATION
+};
+
+const TOAST_ERROR_SUSPENDED = {
+	message: 'Esta cuenta está suspendida hasta que resuelvas tu información de perfil!',
+	color: 'warning',
+	duration: TOAST_DURATION
+};
+
+const TOAST_ERROR_GENERIC = {
+	message: 'Ops, hubo un problema, por favor intenta mas tarde 😅!',
+	color: 'warning',
+	duration: TOAST_DURATION
+};
+
 const Home = () => {
 	const [orders, setOrders] = useState([]);
 
 	const [ slideSpace, setSlideSpace ] = useState(0);
 	const [ longSlideSpace, setLongSlideSpace ] = useState(5);
 
+	const [present] = useIonToast();
+
 	useEffect(() => {
 		ordersService.getActiveOrders()
-			.then(setOrders);
+			.then(setOrders)
+			.catch(e => {
+				console.error('ERROR ===> ' + JSON.stringify(e));
+				if (e.status === 'rejected') {
+					present(TOAST_ERROR_REJECTED);
+				}
+				if (e.status === 'suspended') {
+					present(TOAST_ERROR_SUSPENDED);
+				}
+				else present(TOAST_ERROR_GENERIC);
+			});
 	}, []);
 
 	const orderItems = map(orders, (order) => <OrderItem key={order._id} order={order}/>);

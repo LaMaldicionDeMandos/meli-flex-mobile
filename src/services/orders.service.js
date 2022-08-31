@@ -14,7 +14,8 @@ class OrdersService {
   getActiveOrders() {
     return axios.get( `${API_URL}/orders/available`,
       { headers: HEADERS({Authorization: sessionService.getToken()})}
-    ).then(response => response.data);
+    ).then(response => response.data)
+      .catch(e => Promise.reject(e.response.data));
   }
 
   getMyActiveOrders() {
