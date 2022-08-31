@@ -18,11 +18,15 @@ import OnBoardingDniBack from "./onboarding/OnBoardingDniBack";
 import OnBoardingPhoto from "./onboarding/OnBoardingPhoto";
 import OnBoardingCBU from "./onboarding/OnBoardingCBU";
 
+import profileService from '../services/profile.service';
+import {useHistory} from "react-router-dom";
+
 const OnBoarding = () => {
 	const [profile, setProfile] = useState({});
 	const [ lastSlide, setLastSlide ] = useState(false);
 	const [ firstSlide, setFirstSlide ] = useState(true);
 
+	const history = useHistory();
 	const sliderRef = useRef();
 
 	const checkSlides = async () => {
@@ -44,7 +48,8 @@ const OnBoarding = () => {
 	}
 
 	const finalizeOnBoarding = (profile) => {
-		console.log(`send form: ${JSON.stringify(profile)}`)
+		console.log(`send form: ${JSON.stringify(profile)}`);
+		profileService.sendProfile(profile).then((p) => history.push('tabs/home'));
 	}
 
 	return (

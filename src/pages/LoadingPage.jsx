@@ -9,16 +9,23 @@ import freStyles from './loading.module.scss';
 import React, {useEffect} from "react";
 import {useHistory} from "react-router-dom";
 
+import { isEmpty } from "lodash";
 
-import sessionService from '../services/session.service';
+
+import profileService from '../services/profile.service';
 
 const LoadingPage = () => {
 	const history = useHistory();
 
 	useEffect(() => {
-		sessionService.getProfile()
-			.then((profile) => history.push('tabs/home'))
-			.catch(() => history.push('/onboarding'));
+		profileService.getProfile()
+			.then((profile) => {
+				console.log('Loaded profile => ' + JSON.stringify(profile));
+				if (isEmpty(profile)) return Promise.reject();
+				history.push('tabs/home');
+			})
+			.catch(() =>
+				history.push('/onboarding'));
 	}, []);
 
 	return (

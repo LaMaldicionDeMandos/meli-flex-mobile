@@ -12,6 +12,8 @@ AWS.config.update({
     credentials: new AWS.CognitoIdentityCredentials({ IdentityPoolId: IDENTITY_ID})
 });
 
+const EXPIRATION = 60*10;
+
 const s3 = new S3({
     apiVersion: "2006-03-01",
     params: { Bucket: BUCKET_NAME }
@@ -25,7 +27,7 @@ class ImagesService {
                     reject(err);
                 } else {
                     const images = _.map(data.Contents, (content) => {
-                        const url = s3.getSignedUrl('getObject', {Bucket: BUCKET_NAME, Key: content.Key, Expires: 60*10});
+                        const url = s3.getSignedUrl('getObject', {Bucket: BUCKET_NAME, Key: content.Key, Expires: EXPIRATION});
                         return {src: url, caption: content.Key, key: content.Key};
                     });
                     resolve(images);
@@ -35,11 +37,21 @@ class ImagesService {
         return promise;
     }
 
+    getImage(key) {
+        const promise = new Promise((resolve, reject) => {
+            s3.getObject({Bucket: BUCKET_NAME, Key: key}, (err, data) => {
+                const url = s3.getSignedUrl('getObject', {Bucket: BUCKET_NAME, Key: key, Expires: EXPIRATION});
+                resolve(url);
+            });
+        });
+        return promise;
+    }
+
     uploadImage(name, file) {
         return new AWS.S3.ManagedUpload({params: {Bucket: BUCKET_NAME, Key: name, Body: file}})
             .promise()
             .then(data => {
-                const url = s3.getSignedUrl('getObject', {Bucket: BUCKET_NAME, Key: data.Key, Expires: 60*10});
+                const url = s3.getSignedUrl('getObject', {Bucket: BUCKET_NAME, Key: data.Key, Expires: EXPIRATION});
                 return {src: url, caption: data.Key, key: data.Key};
                 });
     }

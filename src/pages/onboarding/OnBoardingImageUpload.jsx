@@ -15,6 +15,8 @@ import {Camera, CameraDirection, CameraResultType, CameraSource} from '@capacito
 import { head } from 'lodash';
 import imagesService from '../../services/images.service';
 
+const BASE_64_PREFIX = 'data:image/jpeg;base64,';
+
 const OnBoardingImageUpload = ({ icon = idCardOutline, context, orientation = OnBoardingImageUpload.LANDSCAPE, nextHandler = () => {} }) => {
 	const [imageUri, setImageUri] = useState();
 	const previewStyle = orientation === OnBoardingImageUpload.PORTRAIT ? freStyles.previewPortrait : freStyles.previewLandscape;
@@ -24,9 +26,9 @@ const OnBoardingImageUpload = ({ icon = idCardOutline, context, orientation = On
 			nextHandler(delta);
 	}
 
-	const saveImage = (base64Image) => {
-		setImageUri(base64Image);
-		imagesService.uploadImage(context.uri, new Buffer(base64Image, 'base64'))
+	const saveImage = (data) => {
+		setImageUri(BASE_64_PREFIX + data);
+		imagesService.uploadImage(context.uri, new Buffer(data, 'base64'))
 			.then((image) => {
 				console.log('Imagen subida ' + JSON.stringify(image));
 			})
@@ -41,21 +43,21 @@ const OnBoardingImageUpload = ({ icon = idCardOutline, context, orientation = On
 			multiple: false,
 		});
 		const file = head(result.files);
-		saveImage('data:image/jpeg;base64,' + file.data);
+		saveImage(file.data);
 	}
 
 	const takePhoto = async () => {
 		const options = {
 			quality: 90,
 			allowEditing: false,
-			resultType: CameraResultType.DataUrl,
+			resultType: CameraResultType.Base64,
 			source: CameraSource.Camera,
 			direction: CameraDirection.Front
 		}
 		try {
 			const result = await Camera.getPhoto(options);
-			console.log('photo ==>' + JSON.stringify(result.dataUrl));
-			saveImage(result.dataUrl);
+			console.log('photo ==>' + JSON.stringify(result.base64String));
+			saveImage( result.base64String);
 		}catch(e) {
 			console.log('Error al tomar la foto :(');
 		}

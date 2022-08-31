@@ -1,7 +1,6 @@
 import axios from 'axios';
 import * as _ from 'lodash';
 import { Browser } from '@capacitor/browser';
-import { App } from '@capacitor/app';
 
 const API_URL = process.env.REACT_APP_API_URL;
 const MELI_APP_ID = process.env.REACT_APP_MELI_APP_ID;
