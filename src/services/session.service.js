@@ -20,17 +20,6 @@ class SessionService {
       console.log('Page loaded ' + e);
       const m = JSON.stringify(e);
     });
-    /*
-    Browser.addListener('browserFinished', (e) => {
-      console.log('browser finished' + e);
-      Browser.removeAllListeners()
-        .then(() => {
-          console.log("Close app");
-          App.exitApp();
-        });
-    });
-
-     */
     Browser.open({url: MELI_LOGIN_URL});
   }
 

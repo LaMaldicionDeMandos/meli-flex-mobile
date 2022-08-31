@@ -23,20 +23,21 @@ import './theme/variables.css';
 import "./theme/floating-tab-bar.scss";
 import "./theme/main.scss";
 
-import { useEffect } from 'react';
-import { fetchData } from './data/fetcher';
+import {useEffect, useLayoutEffect, useState} from 'react';
 import NavRoutes from './nav/NavRoutes';
 
+import sessionService from './services/session.service';
+
 const App = () => {
+	const [ready, setReady] = useState(false);
 
-	useEffect(() => {
-
-		fetchData();
+	useLayoutEffect(() => {
+		sessionService.refreshAccessToken().then(() => setReady(true));
 	}, []);
 
 	return (
 		<IonApp>
-			<NavRoutes />
+			{ready ? <NavRoutes /> : ''}
 		</IonApp>
 	);
 }
